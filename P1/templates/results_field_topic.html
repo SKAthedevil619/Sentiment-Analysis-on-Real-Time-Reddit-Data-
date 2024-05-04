@@ -1,0 +1,56 @@
+<!-- templates/results_field_topic.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ result }}</h1>
+
+        {% if hindi_data_available %}
+            <div class="section">
+                <h2>Sentiment Distribution for Pure Hindi Comments</h2>
+                <img src="{{ url_for('static', filename='hindi_sentiment_plot.png') }}" alt="Sentiment Distribution for Pure Hindi Comments">
+            </div>
+        {% endif %}
+
+        {% if roman_hindi_data_available %}
+            <div class="section">
+                <h2>Sentiment Distribution for Translated Roman Hindi Comments</h2>
+                <img src="{{ url_for('static', filename='translated_roman_hindi_sentiment_plot.png') }}" alt="Sentiment Distribution for Translated Roman Hindi Comments">
+            </div>
+        {% endif %}
+
+        {% if pure_english_data_available %}
+            <div class="section">
+                <h2>Sentiment Distribution for Pure English Comments</h2>
+                <img src="{{ url_for('static', filename='pure_english_sentiment_plot.png') }}" alt="Sentiment Distribution for Pure English Comments">
+            </div>
+        {% endif %}
+
+        <div class="section">
+            <h2>Percentage Distribution of Sentiments Across Datasets</h2>
+            <img src="{{ url_for('static', filename='combined_sentiment_plot.png') }}" alt="Percentage Distribution of Sentiments Across Datasets">
+        </div>
+
+        <!-- Adding a section for the sentiment summary percentages -->
+        <!-- templates/results_field_topic.html -->
+        <div class="section">
+            <h2>Sentiment Summary</h2>
+            <p style="font-size: large;"> <!-- Increase font size -->
+                Total Sentiments - Positive: {{ '%.3f' | format(sentiment_summary['Positive'] | default(0)) }}%, 
+                Negative: {{ '%.3f' | format(sentiment_summary['Negative'] | default(0)) }}%, 
+                Neutral: {{ '%.3f' | format(sentiment_summary['Neutral'] | default(0)) }}%
+            </p>
+        </div>
+        
+        
+
+
+    </div>
+</body>
+</html>
